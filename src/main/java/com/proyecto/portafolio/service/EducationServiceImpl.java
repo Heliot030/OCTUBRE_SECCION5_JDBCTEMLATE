@@ -2,10 +2,12 @@ package com.proyecto.portafolio.service;
 
 import com.proyecto.portafolio.model.Education;
 import com.proyecto.portafolio.repository.IEducationRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EducationServiceImpl implements IEducationService{
 
     private final IEducationRepository educationRepository;

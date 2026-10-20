@@ -85,8 +85,7 @@ public class SkillRepositoryImpl implements ISkillRepository {
 
     @Override
     public List<Skill> findByPersonalInfoId(Long personalInfo) {
-        String sql = "SELECT id, name, level_percentage, icon_class , personal_info_id From skills"
-                + "WHERE personal_info_id";
-        return jdbcTemplate.query(sql ,skillInfoRowMapper,personalInfo);
+        String sql = "SELECT id, name, level_percentage, icon_class, personal_info_id FROM skills WHERE personal_info_id = ?";
+        return jdbcTemplate.query(sql, skillInfoRowMapper, personalInfo);
     }
 }

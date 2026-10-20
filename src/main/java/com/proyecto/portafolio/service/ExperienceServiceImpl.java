@@ -2,10 +2,12 @@ package com.proyecto.portafolio.service;
 
 import com.proyecto.portafolio.model.Experience;
 import com.proyecto.portafolio.repository.IExperienceRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ExperienceServiceImpl implements IExperienceService {
 
 

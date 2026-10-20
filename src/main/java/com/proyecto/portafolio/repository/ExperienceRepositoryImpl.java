@@ -19,13 +19,33 @@ public class ExperienceRepositoryImpl implements IExperienceRepository{
 
     private final JdbcTemplate jdbcTemplate;
 
+//    private final RowMapper<Experience> experienceRowMapper = (rs, rowNum) -> {
+//        Experience experience = new Experience();
+//        experience.setId(rs.getLong("id"));
+//        experience.setJobTitle(rs.getString("job_title"));
+//        experience.setCoompanyName(rs.getString("company_name"));
+//        experience.setStarDate(rs.getObject("start_date", LocalDate.class).atStartOfDay());
+//        experience.setEndData(rs.getObject("end_date", LocalDate.class).atStartOfDay());
+//        experience.setDescription(rs.getString("description"));
+//        experience.setPersonalInfoId(rs.getLong("personal_info_id"));
+//        return experience;
+//    };
+
+
     private final RowMapper<Experience> experienceRowMapper = (rs, rowNum) -> {
         Experience experience = new Experience();
         experience.setId(rs.getLong("id"));
         experience.setJobTitle(rs.getString("job_title"));
         experience.setCoompanyName(rs.getString("company_name"));
-        experience.setStarDate(rs.getObject("start_date", LocalDate.class).atStartOfDay());
-        experience.setEndData(rs.getObject("end_date", LocalDate.class).atStartOfDay());
+
+        // Obtener objetos de forma segura sin invocar métodos directamente
+        LocalDate startDate = rs.getObject("start_date", LocalDate.class);
+        LocalDate endDate = rs.getObject("end_date", LocalDate.class);
+
+        // Asignación segura con verificación de null
+        experience.setStarDate(startDate != null ? startDate.atStartOfDay() : null);
+        experience.setEndData(endDate != null ? endDate.atStartOfDay() : null);
+
         experience.setDescription(rs.getString("description"));
         experience.setPersonalInfoId(rs.getLong("personal_info_id"));
         return experience;
