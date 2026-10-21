@@ -4,6 +4,7 @@ import com.proyecto.portafolio.exception.ValidationException;
 import com.proyecto.portafolio.model.PersonalInfo;
 import com.proyecto.portafolio.repository.IPersonalInfoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -25,6 +26,7 @@ public class PeronalInfoServiceImpl implements IPersonalInfoService{
     }
 
     @Override
+    @Transactional
     public PersonalInfo save(PersonalInfo personalInfo) {
          BindingResult result = new BeanPropertyBindingResult(personalInfo,"personalInfo");
          validator.validate(personalInfo,result);
@@ -35,15 +37,18 @@ public class PeronalInfoServiceImpl implements IPersonalInfoService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<PersonalInfo> findById(Long id) {
         return iPersonalInfoRepository.findById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonalInfo> findAll() {
         return iPersonalInfoRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
         iPersonalInfoRepository.deleteById(id);

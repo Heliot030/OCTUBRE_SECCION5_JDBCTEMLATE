@@ -33,5 +33,4 @@ public class PersonalInfo {
     private String linkerdinUrl;
     @NotBlank(message = "el githubUrl no debe ser vacio")
     private String githubUrl;
-
 }
